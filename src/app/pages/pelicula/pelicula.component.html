@@ -1,0 +1,48 @@
+<!--Página Html de la página Peliculas-->
+<div class="row animate__animated animate__bounce" *ngIf="pelicula">
+    <div class="col-md-6">
+        <!--Imagen-->
+        <img [src]="pelicula.poster_path | poster" 
+             alt="pelicula.title"
+             class="img-thumbnail">
+    </div>
+    <div class="col-md-6">
+        <!--Detalle-->
+        <h3>{{pelicula.title}}</h3>
+        <div class="row">
+            <div class="col">
+                <!--Copiamos según doc de www.npmjs.com (para el rating)-->
+                <star-rating [value]="pelicula.vote_average" 
+                [totalstars]="10" 
+                checkedcolor="yellow" 
+                uncheckedcolor="grey" 
+                size="15px" 
+                [readonly]="false" 
+                ></star-rating>
+            </div>
+            <div class="col text-white">
+                {{pelicula.vote_average | number:'1.1-2'}}
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col text-white">
+                {{pelicula.overview}}
+            </div>
+        </div>
+        <!--Botón regresar-->
+        <div class="row mt-5">
+            <div class="col">
+                <button class="btn btn-outline-info"
+                        (click)="onRegresar()">
+                    Regresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--traemos la info de los actores para el Slideshow-->
+<div class="row mt-5" *ngIf="cast.length > 0">
+    <div class="col">
+        <app-cast-slideshow [cast]="cast"></app-cast-slideshow>
+    </div>
+</div>
